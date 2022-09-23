@@ -1,0 +1,28 @@
+class Solution {
+	public:
+		int Count(int L, int R){
+		    // Use sieve algorithm to get all the prime numbers till n
+		    vector<bool> isprime(R+1,true);
+    	    for(int i=2;i*i<=R;i++)
+    	    {
+    	        if(isprime[i]==true)
+    	        {
+    	            for(int j=i*i;j<=R;j+=i)
+    	                isprime[j]=false;
+    	        }
+    	    }
+
+		    int prime_count=0,composite=0;
+		    for(int i=L;i<=R;i++)
+		    {
+		        if(i==1)
+		        continue;
+		        if(isprime[i]==true)
+		        prime_count++;
+		        else
+		        composite++;
+		    }
+		    return composite - prime_count; 
+		}
+
+};
