@@ -1,0 +1,38 @@
+//User function template for C++
+
+class Solution{
+public:
+    int minLength(string s, int n) {
+        vector<string> v={"12", "21", "34", "43", "56", "65", "78", "87", "09", "90"};
+        
+        unordered_set<string> checkSet;
+        for(auto i: v)
+            checkSet.insert(i);
+            
+        stack<char> st;
+        for(auto ch: s)
+        {
+            st.push(ch);
+            
+            while(st.size()>1)
+            {
+                string str="";
+                char a=st.top();
+                st.pop();
+                char b=st.top();
+                st.pop();
+            
+                str+=b;
+                str+=a;
+            
+                if(!checkSet.count(str))
+                {
+                    st.push(b);
+                    st.push(a);
+                    break;
+                }
+            }
+        }
+        return st.size();
+    } 
+};
