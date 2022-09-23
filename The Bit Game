@@ -1,0 +1,20 @@
+class Solution{   
+public:
+    int swapBitGame(long long N){
+        long long xo=0;
+        long long o=0;
+        while(N){
+            if(N%2 && o>0){
+                xo^=o;
+            }
+            if(N%2==0){
+                o++;
+            }
+            N/=2;
+        }
+        if(xo)
+            return 1;
+        else
+            return 2;
+    }
+};
