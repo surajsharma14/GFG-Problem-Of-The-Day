@@ -1,0 +1,47 @@
+
+class Solution {
+  public:
+    void fun(vector<pair<int,int>>&vp, vector<vector<int>>& grid, int i, int j, int n, int m, int x, int y)
+   {
+       grid[i][j]=0;
+       if(i-1>=0 && grid[i-1][j])
+       {
+           vp.push_back({i-1-x,j-y});
+           fun(vp,grid,i-1,j,n,m,x,y);
+       }
+       if(j-1>=0 && grid[i][j-1])
+       {
+           vp.push_back({i-x,j-1-y});
+           fun(vp,grid,i,j-1,n,m,x,y);
+       }
+       if(i+1<n && grid[i+1][j])
+       {
+           vp.push_back({i+1-x,j-y});
+           fun(vp,grid,i+1,j,n,m,x,y);
+       }
+       if(j+1<m && grid[i][j+1])
+       {
+           vp.push_back({i-x,j+1-y});
+           fun(vp,grid,i,j+1,n,m,x,y);
+       }
+   }
+   int countDistinctIslands(vector<vector<int>>& grid) {
+       int n=grid.size();
+       int m=grid[0].size();
+       set<vector<pair<int,int>>>us;
+       for(int i=0;i<n;i++)
+       {
+           for(int j=0;j<m;j++)
+           {
+               if(grid[i][j])
+               {
+                   vector<pair<int,int>>vp;
+                   fun(vp,grid,i,j,n,m,i,j);
+                   if(us.find(vp)==us.end())
+                   us.insert(vp);
+               }
+           }
+       }
+       return us.size();
+   }
+};
