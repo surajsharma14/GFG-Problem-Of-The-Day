@@ -1,0 +1,33 @@
+class Solution{
+public:
+    string helper(string s,int &ind){
+        string ans="";
+        for(;ind<s.size() and s[ind]!=']';ind++)
+        {
+            if(isdigit(s[ind]))
+            {
+                int num=0;
+                while(isdigit(s[ind]))
+                {
+                    num=s[ind]-'0'+num*10;
+                    ind++;
+                }
+                ind+=1;
+                auto ret=helper(s,ind);
+                for(int i=0;i<num;i++)
+                    ans+=ret;
+            }
+            else
+                ans+=s[ind];
+        }
+  
+        return ans;
+     }
+
+
+    string decodedString(string s)
+    {
+        int ind=0;
+        return helper(s,ind);
+    }
+};
