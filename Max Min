@@ -1,0 +1,9 @@
+class Solution
+{
+   public:
+    int findSum(int A[], int N)
+    {
+    	return (*min_element(A,A+N)+*max_element(A,A+N));
+    }
+
+};
