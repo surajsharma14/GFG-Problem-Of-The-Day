@@ -1,0 +1,19 @@
+class Solution{
+	public:
+	vector<int> downwardDigonal(int N, vector<vector<int>> A)
+	{
+		vector<int> ans;
+		for(int x=0;x<2*N-1;x++)
+		{
+		    int i=0,j=x;
+		    if(x>=N)
+		    {
+		        j = N-1;
+		        i = x-(N-1);
+		    }
+		    for(;i<N && j>=0;i++,j--)
+		        ans.push_back(A[i][j]);
+		}
+		return ans;
+	}
+};
