@@ -1,0 +1,28 @@
+class Solution
+{
+  public:
+    vector <int> max_of_subarrays(int *arr, int n, int k)
+    {
+        map<int,int> m;
+        vector<int> ans;
+
+        for(int i=0;i<k;i++)
+            m[arr[i]]++;
+
+        if(m.size()>0)
+            ans.push_back(m.rbegin()->first);
+        
+        for(int i=k;i<n;i++)
+        {
+            m[arr[i]]++;
+            
+            if(m[arr[i-k]]==1)
+                m.erase(arr[i-k]);
+            else
+                m[arr[i-k]]--;
+    
+            ans.push_back(m.rbegin()->first);
+        }
+        return ans;
+    }
+};
