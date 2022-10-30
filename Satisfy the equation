@@ -1,0 +1,39 @@
+  public:
+    vector<int> satisfyEqn(int A[], int N) {
+    map<int , vector<pair<int, int>>> mp;
+    
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = i+1 ; j < N ; j++)
+        {
+            int sum = A[i] + A[j];
+            mp[sum].push_back({i , j}); 
+        }
+    }
+    
+    vector<int> ok;
+    
+    for (auto x : mp)
+    {
+        sort(x.second.begin() , x.second.end());  
+        if (x.second.size() >= 2)
+        {
+            for (int i = 1 ; i < x.second.size() ; i++)
+            {
+                if (x.second[0].first  < x.second[i].first and x.second[0].second != x.second[i].first and x.second[0].second != x.second[i].second)
+                {
+                   vector<int> curr;
+                   curr = {x.second[0].first , x.second[0].second , x.second[i].first, x.second[i].second}; 
+                   if (ok.empty())
+                        ok = curr;
+                   else if (ok > curr)
+                        ok = curr;
+                }
+            }
+        }    
+    }
+    if (ok.empty())
+        return {-1 ,-1 , -1 , -1};
+    return ok;
+    }
+};
