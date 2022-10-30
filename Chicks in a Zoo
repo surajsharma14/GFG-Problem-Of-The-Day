@@ -1,0 +1,17 @@
+class Solution {
+public:
+	long long int NoOfChicks(int n){
+	    long long totalChicks=1;
+	    vector<long long> chick(n,0);
+	    chick[0]=1;
+	    
+	    for(int i=1;i<n;i++){
+	        if(i>=6){
+	            totalChicks-=chick[i-6];
+	        }
+	        chick[i]=totalChicks*2;
+	        totalChicks+=totalChicks*2;
+	    }
+	    return totalChicks;
+	}
+};
