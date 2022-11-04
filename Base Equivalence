@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    string baseEquiv(int n, int m){
+        for(int i=2;i<=32;i++)
+        {
+            int expo = (log2(n)/log2(i)) + 1;
+            
+            if(expo >= m)
+            {
+                if(expo == m)
+                    return "Yes";
+            }
+            else
+                break;
+        }
+        return "No";
+    }
+};
