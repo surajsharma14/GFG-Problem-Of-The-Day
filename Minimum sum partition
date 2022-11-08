@@ -1,0 +1,25 @@
+class Solution{
+  public:
+	int minDifference(int a[], int n)  { 
+	    int sum = accumulate(a,a+n,0),ans=0,m;
+	    m = sum/2;
+	
+	    vector<int> v(m+1,0), h(m+1,0);
+	    v[0] = 1;
+	    for(int i=0;i<n;i++)
+	    {
+	        h[0] = 1;
+	        for(int j=1;j<=m;j++)
+	        {
+	            v[j]==1 ? h[j] = 1 : j<a[i] ?  h[j] = 0 : h[j] = v[j-a[i]] ;
+	            if(h[j]==1) 
+	                ans = max(ans,j);
+	        }
+	        v = h;
+	        if(ans==m) 
+	            break;
+	    }
+	    ans *= 2;
+	    return sum-ans;
+	}
+};
