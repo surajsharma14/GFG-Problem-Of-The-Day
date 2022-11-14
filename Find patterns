@@ -1,0 +1,24 @@
+class Solution{   
+public:
+    int numberOfSubsequences(string S, string W){
+        string str;
+        int count=0,i=0,j=0;
+        while(j<S.size())
+        {
+            if(S[j]==W[i])
+            {
+                S.erase(j,1);
+                i++;
+                j--;
+                if(i==W.size())
+                {
+                    count++;
+                    i=0;
+                    j=-1;
+                }
+            }
+            j++;
+        }
+        return count;
+    }
+};
