@@ -1,0 +1,59 @@
+class Solution{
+    public:
+   bool areAnagrams(Node *root1, Node *root2)
+    {
+        set<int>first,second;
+        queue<Node*>q1,q2;
+        q1.push(root1);
+        q2.push(root2);
+        first.insert(root1->data);
+        second.insert(root2->data);
+        
+        while(!q1.empty() and !q2.empty())
+        {
+            if(first!=second)
+                return false;
+            first.clear();
+            second.clear();
+            
+            int t1=q1.size();
+            while(t1--)
+            {
+                auto top=q1.front();
+                q1.pop();
+                if(top->left)
+                {
+                    q1.push(top->left);
+                    first.insert(top->left->data);
+                }
+                if(top->right)
+                {
+                    q1.push(top->right);
+                    first.insert(top->right->data);
+                }
+            }
+            
+            t1=q2.size();
+            while(t1--)
+            {
+                auto top=q2.front();
+                q2.pop();
+                if(top->left)
+                {
+                    q2.push(top->left);
+                    second.insert(top->left->data);
+                }
+                if(top->right)
+                {
+                    q2.push(top->right);
+                    second.insert(top->right->data);
+                }
+            }
+        }
+        if(!q1.empty() or !q2.empty())
+            return false;
+        
+        return true;
+        
+    }
+};
